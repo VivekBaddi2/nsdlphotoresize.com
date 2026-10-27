@@ -1,4 +1,4 @@
-# build output
+what# build output
 dist/
 
 # generated types
@@ -6,6 +6,11 @@ dist/
 
 # dependencies
 node_modules/
+
+# locally synced Tailwind documentation snapshot
+.agents/skills/tailwind-4-docs/references/docs/
+.agents/skills/tailwind-4-docs/references/docs-index.tsx
+.agents/skills/tailwind-4-docs/references/docs-source.txt
 
 # logs
 npm-debug.log*
