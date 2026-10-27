@@ -284,21 +284,103 @@ summary:focus-visible {
 	min-height: 210px;
 	place-items: center;
 	padding: 14px;
-	cursor: grab;
 }
 
-.editor-preview:active {
-	cursor: grabbing;
+.crop-stage {
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
+	max-height: 280px;
+	line-height: 0;
+	touch-action: none;
 }
 
 #preview-canvas {
 	display: block;
-	width: min(100%, 360px);
+	width: auto;
+	height: auto;
+	max-width: 100%;
 	max-height: 280px;
-	border-radius: 5px;
-	background-color: #f0f0f3;
-	object-fit: contain;
+	background: #f0f0f3;
 	touch-action: none;
+}
+
+.crop-selection {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid #fff;
+	box-shadow:
+		0 0 0 1px rgba(0, 0, 0, 0.75),
+		0 0 0 9999px rgba(0, 0, 0, 0.42);
+	cursor: move;
+	touch-action: none;
+}
+
+.crop-selection:focus-visible {
+	outline: 2px solid #0d74ce;
+	outline-offset: 3px;
+}
+
+.crop-grid {
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(
+			to right,
+			transparent 33.15%,
+			rgba(255, 255, 255, 0.8) 33.15%,
+			rgba(255, 255, 255, 0.8) 33.5%,
+			transparent 33.5% 66.5%,
+			rgba(255, 255, 255, 0.8) 66.5%,
+			rgba(255, 255, 255, 0.8) 66.85%,
+			transparent 66.85%
+		),
+		linear-gradient(
+			to bottom,
+			transparent 33.15%,
+			rgba(255, 255, 255, 0.8) 33.15%,
+			rgba(255, 255, 255, 0.8) 33.5%,
+			transparent 33.5% 66.5%,
+			rgba(255, 255, 255, 0.8) 66.5%,
+			rgba(255, 255, 255, 0.8) 66.85%,
+			transparent 66.85%
+		);
+	pointer-events: none;
+}
+
+.crop-handle {
+	position: absolute;
+	z-index: 1;
+	width: 14px;
+	height: 14px;
+	box-sizing: border-box;
+	border: 2px solid #0d74ce;
+	border-radius: 3px;
+	background: #fff;
+}
+
+.crop-handle-nw {
+	top: -7px;
+	left: -7px;
+	cursor: nwse-resize;
+}
+
+.crop-handle-ne {
+	top: -7px;
+	right: -7px;
+	cursor: nesw-resize;
+}
+
+.crop-handle-sw {
+	bottom: -7px;
+	left: -7px;
+	cursor: nesw-resize;
+}
+
+.crop-handle-se {
+	right: -7px;
+	bottom: -7px;
+	cursor: nwse-resize;
 }
 
 .canvas-hint {
@@ -311,19 +393,6 @@ summary:focus-visible {
 	color: white;
 	font-size: 10px;
 	pointer-events: none;
-}
-
-.zoom-range {
-	width: 100%;
-	height: 42px;
-	margin: 0;
-	accent-color: #171717;
-	cursor: pointer;
-}
-
-.zoom-range:disabled {
-	cursor: not-allowed;
-	opacity: 0.45;
 }
 
 .filename-field {

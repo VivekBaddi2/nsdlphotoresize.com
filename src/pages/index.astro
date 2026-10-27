@@ -159,7 +159,7 @@ import Layout from "../layouts/Layout.astro";
 						</div>
 
 						<div class="space-y-5 px-5 py-5 sm:px-7 sm:py-6">
-							<div>
+							<div id="mode-controls" hidden>
 								<p class="mb-2.5 text-sm font-medium">
 									1. Choose image type
 								</p>
@@ -252,44 +252,55 @@ import Layout from "../layouts/Layout.astro";
 										>Choose image</span
 									>
 									<span class="mt-3 block text-xs text-muted"
-										>JPG, PNG or WebP · images are not
-										uploaded</span
+										>JPG, PNG or WebP</span
 									>
 								</div>
 								<div class="editor-preview" hidden>
-									<canvas
-										id="preview-canvas"
-										tabindex="0"
-										aria-label="Image crop preview. Drag to reposition, or use arrow keys to nudge the image."
-									></canvas>
+									<div class="crop-stage">
+										<canvas
+											id="preview-canvas"
+										></canvas>
+										<div
+											class="crop-selection"
+											tabindex="0"
+											role="group"
+											aria-label="Crop selection. Use arrow keys to move it. Drag inside to reposition or drag a corner to resize."
+										>
+											<div
+												class="crop-grid"
+												aria-hidden="true"
+											>
+											</div>
+											<span
+												class="crop-handle crop-handle-nw"
+												data-corner="nw"
+												aria-hidden="true"></span>
+											<span
+												class="crop-handle crop-handle-ne"
+												data-corner="ne"
+												aria-hidden="true"></span>
+											<span
+												class="crop-handle crop-handle-sw"
+												data-corner="sw"
+												aria-hidden="true"></span>
+											<span
+												class="crop-handle crop-handle-se"
+												data-corner="se"
+												aria-hidden="true"></span>
+										</div>
+									</div>
 									<div class="canvas-hint">
-										Drag to reposition · arrow keys to nudge
+										Drag the box to move · drag a corner to resize
 									</div>
 								</div>
 							</div>
 
+							<div id="editor-controls" class="space-y-5" hidden>
 							<div class="grid gap-4 sm:grid-cols-2">
-								<label class="field-label">
-									<span
-										class="flex items-center justify-between gap-2"
-									>
-										Zoom <span
-											id="zoom-value"
-											class="font-normal text-body"
-											>100%</span
-										>
-									</span>
-									<input
-										id="zoom"
-										class="zoom-range"
-										type="range"
-										min="100"
-										max="300"
-										value="100"
-										step="1"
-										disabled
-									/>
-								</label>
+								<p class="text-sm leading-6 text-body">
+									Drag the crop box to move it. Drag a corner
+									to resize; its proportions stay fixed.
+								</p>
 								<label class="field-label">
 									<span
 										>Maximum file size <span
@@ -356,8 +367,8 @@ import Layout from "../layouts/Layout.astro";
 										class="form-control"
 										type="number"
 										value="2.5"
-										readonly
-										aria-readonly="true"
+										min="0.1"
+										step="0.1"
 									/>
 								</label>
 								<label class="field-label">
@@ -372,8 +383,8 @@ import Layout from "../layouts/Layout.astro";
 										class="form-control"
 										type="number"
 										value="3.5"
-										readonly
-										aria-readonly="true"
+										min="0.1"
+										step="0.1"
 									/>
 								</label>
 							</div>
@@ -443,19 +454,21 @@ import Layout from "../layouts/Layout.astro";
 									disabled>Start over</button
 								>
 							</div>
+							<p class="text-xs leading-5 text-body">
+								Default sizes: photo 2.5 × 3.5 cm; signature
+								4.5 × 2 cm. Adjust the width and height as
+								needed. Exports are prepared at 200 DPI or
+								higher and compressed to under 50 KB. Check
+								the selected portal’s current instructions
+								if your application type differs.
+							</p>
+							</div>
 							<p
 								id="status"
 								class="status-message"
 								role="status"
 								aria-live="polite"
 							>
-							</p>
-							<p class="text-xs leading-5 text-body">
-								Photo: 2.5 × 3.5 cm. Signature: 2 × 4.5 cm. Both
-								exports are prepared at 200 DPI or higher and
-								compressed to under 50 KB. Check the selected
-								portal’s current instructions if your
-								application type differs.
 							</p>
 						</div>
 					</section>
@@ -492,8 +505,8 @@ import Layout from "../layouts/Layout.astro";
 								Position and check it
 							</h3>
 							<p class="mt-2 text-sm leading-6 text-body">
-								Move and zoom your image, then review the output
-								dimensions and file size.
+								Move the crop box or drag a corner to resize it,
+								then review the output dimensions and file size.
 							</p>
 						</li>
 						<li class="step-card">
@@ -596,8 +609,9 @@ import Layout from "../layouts/Layout.astro";
 								Check the exact limits
 							</h3>
 							<p class="mt-2 text-sm leading-6 text-body">
-								Photo: 2.5 × 3.5 cm. Signature: 2 × 4.5 cm. Keep
-								each JPEG under 50 KB.
+								Default sizes: photo 2.5 × 3.5 cm; signature
+								4.5 × 2 cm. Adjust as needed and keep each JPEG
+								under 50 KB.
 							</p>
 						</article>
 						<article class="requirement-card">
@@ -674,9 +688,10 @@ import Layout from "../layouts/Layout.astro";
 								work?</summary
 							>
 							<p>
-								The tool uses a 2.5 × 3.5 cm photo and a 2 × 4.5
-								cm signature, at 200 DPI or higher, with each
-								JPEG compressed to under 50 KB. Check the
+								The default sizes are 2.5 × 3.5 cm for photos
+								and 4.5 × 2 cm for signatures. You can adjust
+								width and height; exports use 200 DPI or higher
+								and are compressed to under 50 KB. Check the
 								selected provider’s portal if your application
 								type has different instructions.
 							</p>
@@ -696,10 +711,9 @@ import Layout from "../layouts/Layout.astro";
 								>What can I do if the crop looks wrong?</summary
 							>
 							<p>
-								Drag the preview or use the arrow keys to
-								reposition it, adjust the zoom, or choose
-								another image. The original file is not
-								modified.
+								Drag the crop box to reposition it or drag a
+								corner to resize it. Its proportions stay fixed.
+								The original file is not modified.
 							</p>
 						</details>
 					</div>
@@ -731,12 +745,26 @@ import Layout from "../layouts/Layout.astro";
 			return element;
 		}
 
+		function getCanvasContext(
+			canvas: HTMLCanvasElement,
+		): CanvasRenderingContext2D {
+			const context = canvas.getContext("2d");
+			if (!context)
+				throw new Error("The browser could not initialize the image cropper.");
+			return context;
+		}
+
 		const fileInput = getElement<HTMLInputElement>("#file-input");
 		const dropZone = getElement<HTMLDivElement>("#drop-zone");
+		const modeControls = getElement<HTMLDivElement>("#mode-controls");
+		const editorControls = getElement<HTMLDivElement>("#editor-controls");
+		const cropStage = getElement<HTMLDivElement>(".crop-stage");
+		const cropSelection =
+			getElement<HTMLDivElement>(".crop-selection");
 		const canvas = getElement<HTMLCanvasElement>("#preview-canvas");
-		const context = canvas.getContext("2d");
-		const zoomInput = getElement<HTMLInputElement>("#zoom");
-		const zoomValue = getElement<HTMLSpanElement>("#zoom-value");
+		const previewContext = getCanvasContext(canvas);
+		const outputCanvas = document.createElement("canvas");
+		const outputContext = getCanvasContext(outputCanvas);
 		const providerInput = getElement<HTMLSelectElement>("#provider");
 		const providerGuide = getElement<HTMLAnchorElement>("#provider-guide");
 		const captureGuidance =
@@ -761,10 +789,16 @@ import Layout from "../layouts/Layout.astro";
 		let image: HTMLImageElement | null = null;
 		let imageUrl = "";
 		let mode: "photo" | "signature" = "photo";
-		let zoom = 1;
-		let offsetX = 0;
-		let offsetY = 0;
-		let dragStart: { x: number; y: number } | null = null;
+		let cropRect: { x: number; y: number; width: number; height: number } | null =
+			null;
+		let cropRatio = 0;
+		let dragState: {
+			pointerId: number;
+			startX: number;
+			startY: number;
+			initialCrop: { x: number; y: number; width: number; height: number };
+			corner: string | null;
+		} | null = null;
 		const maxFileSizeKb = 50;
 
 		function setStatus(message: string, kind = "") {
@@ -802,37 +836,101 @@ import Layout from "../layouts/Layout.astro";
 			}
 			outputDimensions.textContent = `${output.width} × ${output.height} px`;
 			fileDetails.textContent = `JPEG resolution metadata: ${output.dpi} DPI`;
-			if (canvas) {
-				canvas.width = output.width;
-				canvas.height = output.height;
+			if (
+				outputCanvas.width !== output.width ||
+				outputCanvas.height !== output.height
+			) {
+				outputCanvas.width = output.width;
+				outputCanvas.height = output.height;
 			}
+			const nextRatio = output.width / output.height;
+			if (
+				image &&
+				(!cropRect || Math.abs(nextRatio - cropRatio) > 0.001)
+			) {
+				const centerX = cropRect
+					? cropRect.x + cropRect.width / 2
+					: image.naturalWidth / 2;
+				const centerY = cropRect
+					? cropRect.y + cropRect.height / 2
+					: image.naturalHeight / 2;
+				const maxWidth = Math.min(
+					centerX * 2,
+					(image.naturalWidth - centerX) * 2,
+					centerY * 2 * nextRatio,
+					(image.naturalHeight - centerY) * 2 * nextRatio,
+				);
+				const width = maxWidth * 0.85;
+				const height = width / nextRatio;
+				cropRect = {
+					x: centerX - width / 2,
+					y: centerY - height / 2,
+					width,
+					height,
+				};
+			}
+			cropRatio = nextRatio;
 			drawPreview();
 			downloadButton.disabled = !image;
+		}
+
+		function updateCropSelection() {
+			if (!image || !cropRect) return;
+			const bounds = canvas.getBoundingClientRect();
+			if (!bounds.width) return;
+			const displayScale = bounds.width / image.naturalWidth;
+			cropSelection.style.left = `${cropRect.x * displayScale}px`;
+			cropSelection.style.top = `${cropRect.y * displayScale}px`;
+			cropSelection.style.width = `${cropRect.width * displayScale}px`;
+			cropSelection.style.height = `${cropRect.height * displayScale}px`;
 		}
 
 		function drawPreview() {
 			if (
 				!image ||
-				!canvas ||
-				!context ||
+				!cropRect ||
 				!canvas.width ||
 				!canvas.height
 			)
 				return;
-			context.fillStyle = "#fff";
-			context.fillRect(0, 0, canvas.width, canvas.height);
-			const fit = Math.max(
-				canvas.width / image.naturalWidth,
-				canvas.height / image.naturalHeight,
+			const previewScale = Math.min(
+				1,
+				1000 / image.naturalWidth,
+				800 / image.naturalHeight,
 			);
-			const drawWidth = image.naturalWidth * fit * zoom;
-			const drawHeight = image.naturalHeight * fit * zoom;
-			context.drawImage(
+			const previewWidth = Math.max(
+				1,
+				Math.round(image.naturalWidth * previewScale),
+			);
+			const previewHeight = Math.max(
+				1,
+				Math.round(image.naturalHeight * previewScale),
+			);
+			if (canvas.width !== previewWidth || canvas.height !== previewHeight) {
+				canvas.width = previewWidth;
+				canvas.height = previewHeight;
+			}
+			previewContext.clearRect(0, 0, canvas.width, canvas.height);
+			previewContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+			updateCropSelection();
+
+			outputContext.fillStyle = "#fff";
+			outputContext.fillRect(
+				0,
+				0,
+				outputCanvas.width,
+				outputCanvas.height,
+			);
+			outputContext.drawImage(
 				image,
-				(canvas.width - drawWidth) / 2 + offsetX,
-				(canvas.height - drawHeight) / 2 + offsetY,
-				drawWidth,
-				drawHeight,
+				cropRect.x,
+				cropRect.y,
+				cropRect.width,
+				cropRect.height,
+				0,
+				0,
+				outputCanvas.width,
+				outputCanvas.height,
 			);
 		}
 
@@ -841,7 +939,7 @@ import Layout from "../layouts/Layout.astro";
 			const preset =
 				nextMode === "photo"
 					? { width: 2.5, height: 3.5 }
-					: { width: 2, height: 4.5 };
+					: { width: 4.5, height: 2 };
 			widthInput.value = String(preset.width);
 			heightInput.value = String(preset.height);
 			filenameInput.value =
@@ -855,11 +953,6 @@ import Layout from "../layouts/Layout.astro";
 				button.classList.toggle("is-active", active);
 				button.setAttribute("aria-pressed", String(active));
 			});
-			zoom = 1;
-			offsetX = 0;
-			offsetY = 0;
-			zoomInput.value = "100";
-			zoomValue.textContent = "100%";
 			updateDimensions();
 		}
 
@@ -897,14 +990,15 @@ import Layout from "../layouts/Layout.astro";
 				image = nextImage;
 				placeholder.hidden = true;
 				editorPreview.hidden = false;
-				zoomInput.disabled = false;
+				modeControls.hidden = false;
+				editorControls.hidden = false;
 				removeButton.disabled = false;
-				zoom = 1;
-				offsetX = 0;
-				offsetY = 0;
+				dragState = null;
+				cropRect = null;
+				cropRatio = 0;
 				updateDimensions();
 				setStatus(
-					`${file.name} is ready. Drag the preview to adjust the crop.`,
+					`${file.name} is ready. Move the crop box or drag a corner to resize it.`,
 				);
 			};
 			nextImage.onerror = () => {
@@ -924,22 +1018,26 @@ import Layout from "../layouts/Layout.astro";
 			fileInput.value = "";
 			placeholder.hidden = false;
 			editorPreview.hidden = true;
-			zoomInput.disabled = true;
+			modeControls.hidden = true;
+			editorControls.hidden = true;
 			removeButton.disabled = true;
 			downloadButton.disabled = true;
-			zoom = 1;
-			offsetX = 0;
-			offsetY = 0;
-			zoomInput.value = "100";
-			zoomValue.textContent = "100%";
-			if (context && canvas)
-				context.clearRect(0, 0, canvas.width, canvas.height);
+			dragState = null;
+			cropRect = null;
+			cropRatio = 0;
+			previewContext.clearRect(0, 0, canvas.width, canvas.height);
+			outputContext.clearRect(
+				0,
+				0,
+				outputCanvas.width,
+				outputCanvas.height,
+			);
 			setStatus("");
 		}
 
 		function getBlob(quality: number): Promise<Blob> {
 			return new Promise<Blob>((resolve, reject) => {
-				canvas.toBlob(
+				outputCanvas.toBlob(
 					(blob) => {
 						if (blob) resolve(blob);
 						else
@@ -1033,7 +1131,7 @@ import Layout from "../layouts/Layout.astro";
 		}
 
 		async function exportImage() {
-			if (!image) {
+			if (!image || !cropRect) {
 				setStatus("Choose an image before downloading.", "error");
 				return;
 			}
@@ -1131,9 +1229,10 @@ import Layout from "../layouts/Layout.astro";
 				loadFile(event.currentTarget.files?.[0]);
 		});
 		dropZone.addEventListener("click", (event) => {
+			if (image) return;
 			if (
 				event.target instanceof Element &&
-				event.target.closest("canvas")
+				event.target.closest(".crop-stage")
 			)
 				return;
 			fileInput.click();
@@ -1156,44 +1255,139 @@ import Layout from "../layouts/Layout.astro";
 			if (!event.dataTransfer) return;
 			loadFile(event.dataTransfer.files?.[0]);
 		});
-		zoomInput.addEventListener("input", () => {
-			zoom = Number(zoomInput.value) / 100;
-			zoomValue.textContent = `${zoomInput.value}%`;
-			drawPreview();
-		});
 		[dpiInput, widthInput, heightInput].forEach((input) =>
 			input.addEventListener("input", updateDimensions),
 		);
+		window.addEventListener("resize", updateCropSelection);
 		downloadButton.addEventListener("click", exportImage);
 		removeButton.addEventListener("click", resetImage);
 
-		canvas.addEventListener("pointerdown", (event) => {
-			if (!image) return;
-			canvas.setPointerCapture(event.pointerId);
-			dragStart = { x: event.clientX, y: event.clientY };
-		});
-		canvas.addEventListener("pointermove", (event) => {
-			if (!dragStart) return;
+		cropStage.addEventListener("pointerdown", (event) => {
+			if (
+				!image ||
+				!cropRect ||
+				!(event.target instanceof Element) ||
+				!event.target.closest(".crop-selection")
+			)
+				return;
 			const bounds = canvas.getBoundingClientRect();
-			offsetX +=
-				((event.clientX - dragStart.x) * canvas.width) / bounds.width;
-			offsetY +=
-				((event.clientY - dragStart.y) * canvas.height) / bounds.height;
-			dragStart = { x: event.clientX, y: event.clientY };
+			if (!bounds.width || !bounds.height) return;
+			const corner =
+				event.target
+					.closest("[data-corner]")
+					?.getAttribute("data-corner") ?? null;
+			dragState = {
+				pointerId: event.pointerId,
+				startX:
+					((event.clientX - bounds.left) / bounds.width) *
+					image.naturalWidth,
+				startY:
+					((event.clientY - bounds.top) / bounds.height) *
+					image.naturalHeight,
+				initialCrop: { ...cropRect },
+				corner,
+			};
+			cropStage.setPointerCapture(event.pointerId);
+			cropSelection.focus({ preventScroll: true });
+			event.preventDefault();
+		});
+		cropStage.addEventListener("pointermove", (event) => {
+			if (
+				!image ||
+				!dragState ||
+				dragState.pointerId !== event.pointerId
+			)
+				return;
+			const bounds = canvas.getBoundingClientRect();
+			if (!bounds.width || !bounds.height) return;
+			const pointerX =
+				((event.clientX - bounds.left) / bounds.width) *
+				image.naturalWidth;
+			const pointerY =
+				((event.clientY - bounds.top) / bounds.height) *
+				image.naturalHeight;
+			const deltaX = pointerX - dragState.startX;
+			const deltaY = pointerY - dragState.startY;
+			const initial = dragState.initialCrop;
+			if (!dragState.corner) {
+				cropRect = {
+					...initial,
+					x: Math.max(
+						0,
+						Math.min(
+							image.naturalWidth - initial.width,
+							initial.x + deltaX,
+						),
+					),
+					y: Math.max(
+						0,
+						Math.min(
+							image.naturalHeight - initial.height,
+							initial.y + deltaY,
+						),
+					),
+				};
+			} else {
+				const directionX = dragState.corner.includes("w") ? -1 : 1;
+				const directionY = dragState.corner.includes("n") ? -1 : 1;
+				const anchorX =
+					directionX < 0 ? initial.x + initial.width : initial.x;
+				const anchorY =
+					directionY < 0 ? initial.y + initial.height : initial.y;
+				const maxWidth = Math.min(
+					directionX < 0
+						? anchorX
+						: image.naturalWidth - anchorX,
+					(directionY < 0
+						? anchorY
+						: image.naturalHeight - anchorY) * cropRatio,
+				);
+				const minWidth = Math.min(32, maxWidth);
+				const width = Math.min(
+					maxWidth,
+					Math.max(
+						minWidth,
+						Math.max(
+							Math.abs(pointerX - anchorX),
+							Math.abs(pointerY - anchorY) * cropRatio,
+						),
+					),
+				);
+				const height = width / cropRatio;
+				cropRect = {
+					x: directionX < 0 ? anchorX - width : anchorX,
+					y: directionY < 0 ? anchorY - height : anchorY,
+					width,
+					height,
+				};
+			}
 			drawPreview();
 		});
-		canvas.addEventListener("pointerup", () => {
-			dragStart = null;
+		cropStage.addEventListener("pointerup", (event) => {
+			if (dragState?.pointerId === event.pointerId) dragState = null;
 		});
-		canvas.addEventListener("pointercancel", () => {
-			dragStart = null;
+		cropStage.addEventListener("pointercancel", (event) => {
+			if (dragState?.pointerId === event.pointerId) dragState = null;
 		});
-		canvas.addEventListener("keydown", (event) => {
-			const step = event.shiftKey ? 20 : 5;
-			if (event.key === "ArrowLeft") offsetX -= step;
-			else if (event.key === "ArrowRight") offsetX += step;
-			else if (event.key === "ArrowUp") offsetY -= step;
-			else if (event.key === "ArrowDown") offsetY += step;
+		cropSelection.addEventListener("keydown", (event) => {
+			if (!image || !cropRect) return;
+			const step =
+				(Math.min(image.naturalWidth, image.naturalHeight) *
+					(event.shiftKey ? 0.05 : 0.01));
+			if (event.key === "ArrowLeft")
+				cropRect.x = Math.max(0, cropRect.x - step);
+			else if (event.key === "ArrowRight")
+				cropRect.x = Math.min(
+					image.naturalWidth - cropRect.width,
+					cropRect.x + step,
+				);
+			else if (event.key === "ArrowUp")
+				cropRect.y = Math.max(0, cropRect.y - step);
+			else if (event.key === "ArrowDown")
+				cropRect.y = Math.min(
+					image.naturalHeight - cropRect.height,
+					cropRect.y + step,
+				);
 			else return;
 			event.preventDefault();
 			drawPreview();
