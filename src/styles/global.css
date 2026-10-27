@@ -416,21 +416,6 @@ summary:focus-visible {
 	outline-offset: 2px;
 }
 
-.status-message {
-	min-height: 1.2rem;
-	color: #60646c;
-	font-size: 12px;
-	line-height: 1.5;
-}
-
-.status-message[data-kind="error"] {
-	color: #b42318;
-}
-
-.status-message[data-kind="warning"] {
-	color: #8a5700;
-}
-
 .section-heading {
 	color: #171717;
 	font-size: clamp(1.75rem, 3.4vw, 2.25rem);
