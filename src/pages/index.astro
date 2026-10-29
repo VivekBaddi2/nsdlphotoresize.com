@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import FaqList from "../components/FaqList.astro";
 ---
 
 <Layout>
@@ -257,6 +258,21 @@ import SiteFooter from "../components/SiteFooter.astro";
 							</div>
 
 							<div id="editor-controls" class="space-y-5" hidden>
+								<label class="field-label">
+									<span>Application portal preset</span>
+									<select id="portal-preset" class="form-control">
+										<option value="nsdl" selected
+											>NSDL / Protean</option
+										>
+										<option value="uti">UTIITSL</option>
+									</select>
+								</label>
+								<p class="-mt-3 text-xs leading-5 text-body">
+									Selecting a portal loads its photo or
+									signature dimensions, resolution, and file
+									size limit. Verify the live upload form
+									before submitting.
+								</p>
 								<div>
 									<p class="text-sm leading-6 text-body">
 										Drag the crop box to move it. Drag a
@@ -309,7 +325,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 											type="number"
 											value="2.5"
 											min="0.1"
-											step="0.1"
+											step="any"
 										/>
 									</label>
 									<label class="field-label">
@@ -325,7 +341,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 											type="number"
 											value="3.5"
 											min="0.1"
-											step="0.1"
+											step="any"
 										/>
 									</label>
 								</div>
@@ -397,13 +413,11 @@ import SiteFooter from "../components/SiteFooter.astro";
 									>
 								</div>
 								<p class="text-xs leading-5 text-body">
-									Default sizes: Photo 2.5 × 3.5 cm (width x height);
-									Signature 4.5 × 2 cm (width x height). Adjust the width and height as
-									needed. Exports are prepared at 200 DPI or
-									higher and compressed to under 50 KB. Check
-									your application portal’s current
-									instructions if your application type
-									differs.
+									Adjust the loaded dimensions if needed. The
+									pixel preview reflects the selected
+									dimensions and DPI; JPEG exports are kept
+									under the selected portal preset’s file
+									size limit.
 								</p>
 							</div>
 						</div>
@@ -449,7 +463,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 								Move the crop box to frame the image, select
 								the resolution, and review its dimensions
 								and file size. The JPEG export is prepared
-								under 50 KB.
+								within the selected portal preset’s file-size
+								limit.
 							</p>
 						</li>
 						<li class="step-card">
@@ -473,7 +488,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 				class="border-y border-hairline bg-surface-soft px-5 py-16 sm:px-8 sm:py-20"
 			>
 				<div
-					class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr]"
+					class="mx-auto max-w-6xl gap-10 flex flex-col"
 				>
 					<div>
 						<p class="eyebrow mb-3">Check before uploading</p>
@@ -481,15 +496,68 @@ import SiteFooter from "../components/SiteFooter.astro";
 							PAN card photo and signature size requirements
 						</h2>
 						<p class="mt-4 leading-7 text-body">
-							Use this PAN card document resizer online to prepare
-							a photo or signature JPEG under 50 KB. The default
-							photo size is 2.5 × 3.5 cm and the signature size is
-							4.5 × 2 cm, with resolution settings starting at
-							200 DPI. These are editable defaults, not a
-							guarantee of acceptance: image dimensions, file
-							size, format, and resolution can vary by application.
-							Check the latest instructions from the service you
-							are using before you upload.
+							Select the matching portal preset in the resizer
+							to load its photo or signature dimensions,
+							resolution, and file-size limit. The supplied
+							reference lists different requirements for
+							NSDL/Protean and UTIITSL, so do not reuse one
+							portal’s image for the other. Confirm the current
+							live upload form before submitting.
+						</p>
+						<div class="mt-6 overflow-x-auto rounded-2xl border border-hairline bg-white">
+							<table class="w-full min-w-[42rem] text-left text-sm">
+								<caption class="sr-only">
+									Photo and signature upload specifications by
+									PAN application portal
+								</caption>
+								<thead class="bg-surface-soft text-ink">
+									<tr>
+										<th class="px-4 py-3 font-semibold">Portal</th>
+										<th class="px-4 py-3 font-semibold">Image</th>
+										<th class="px-4 py-3 font-semibold">Dimensions</th>
+										<th class="px-4 py-3 font-semibold">Resolution</th>
+										<th class="px-4 py-3 font-semibold">Format / max size</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-hairline">
+									<tr>
+										<td class="px-4 py-3">NSDL / Protean</td>
+										<td class="px-4 py-3">Photograph</td>
+										<td class="px-4 py-3">2.5 × 3.5 cm (W × H); about 197 × 276 px</td>
+										<td class="px-4 py-3">200 DPI</td>
+										<td class="px-4 py-3">JPEG / 50 KB</td>
+									</tr>
+									<tr>
+										<td class="px-4 py-3">NSDL / Protean</td>
+										<td class="px-4 py-3">Signature</td>
+										<td class="px-4 py-3">4.5 × 2 cm (W × H); about 354 × 157 px</td>
+										<td class="px-4 py-3">200 DPI</td>
+										<td class="px-4 py-3">JPEG / 50 KB</td>
+									</tr>
+									<tr>
+										<td class="px-4 py-3">UTIITSL</td>
+										<td class="px-4 py-3">Photograph</td>
+										<td class="px-4 py-3">213 × 213 px</td>
+										<td class="px-4 py-3">300 DPI</td>
+										<td class="px-4 py-3">JPEG / 30 KB</td>
+									</tr>
+									<tr>
+										<td class="px-4 py-3">UTIITSL</td>
+										<td class="px-4 py-3">Signature</td>
+										<td class="px-4 py-3">400 × 200 px</td>
+										<td class="px-4 py-3">600 DPI</td>
+										<td class="px-4 py-3">JPEG / 60 KB</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<p class="mt-3 text-sm leading-6 text-body">
+							NSDL/Protean photo guidance calls for a color photo
+							on a white background; its signature may use black
+							or blue ink on plain white paper. UTIITSL guidance
+							calls for a color photo on white and a black-ink
+							signature on plain white paper. Portal rules can
+							change; always follow the current upload form.
 						</p>
 						<div class="mt-5 flex flex-wrap gap-3">
 							<a
@@ -560,11 +628,12 @@ import SiteFooter from "../components/SiteFooter.astro";
 								Confirm dimensions and KB limits
 							</h3>
 							<p class="mt-2 text-sm leading-6 text-body">
-								The presets are 2.5 × 3.5 cm for a photo and
-								4.5 × 2 cm for a signature. The tool compresses
-								each JPEG under 50 KB; compare dimensions,
-								resolution, and file limits with the current
-								portal instructions.
+							NSDL/Protean: photo 2.5 × 3.5 cm and signature
+							4.5 × 2 cm, both 200 DPI and 50 KB max.
+							UTIITSL: photo 213 × 213 px at 300 DPI, 30 KB
+							max; signature 400 × 200 px at 600 DPI, 60 KB
+							max. Choose the matching preset and verify the
+							current portal instructions.
 							</p>
 						</article>
 						<article class="requirement-card">
@@ -625,53 +694,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 					<h2 class="section-heading text-center">
 						Frequently asked questions
 					</h2>
-					<div
-						class="mt-8 divide-y divide-hairline border-y border-hairline"
-					>
-						<details class="faq-item">
-							<summary
-								>Are my photos uploaded to a server?</summary
-							>
-							<p>
-								No. The selected image is processed locally in
-								your browser and is not sent to this website.
-								Downloading the result saves a new file to your
-								device.
-							</p>
-						</details>
-						<details class="faq-item">
-							<summary
-								>Are the displayed dimensions guaranteed to
-								work?</summary
-							>
-							<p>
-								The default sizes are 2.5 × 3.5 cm for photos
-								and 4.5 × 2 cm for signatures. You can adjust
-								width and height; exports use 200 DPI or higher
-								and are compressed to under 50 KB. Check your
-								application portal if its requirements differ.
-							</p>
-						</details>
-						<details class="faq-item">
-							<summary>Can I reduce the JPEG file size?</summary>
-							<p>
-								Yes. Each JPEG is automatically compressed to
-								stay under 50 KB. If a complex image cannot
-								reach the limit at its minimum quality setting,
-								the tool will ask you to try a simpler image
-								rather than export an oversized file.
-							</p>
-						</details>
-						<details class="faq-item">
-							<summary
-								>What can I do if the crop looks wrong?</summary
-							>
-							<p>
-								Drag the crop box to reposition it or drag a
-								corner to resize it. Its proportions stay fixed.
-								The original file is not modified.
-							</p>
-						</details>
+					<div class="mt-8">
+						<FaqList />
 					</div>
 				</div>
 			</section>
@@ -704,16 +728,15 @@ import SiteFooter from "../components/SiteFooter.astro";
 							Resize Photo for PAN Card and Signature
 						</h3>
 						<p>
-							Choose Photograph or Signature after selecting your
-							image. The photo preset starts at 2.5 × 3.5 cm, and
-							the signature preset starts at 4.5 × 2 cm; both
-							values can be changed to match the instructions for
-							your application. Drag the crop box to position the
-							image and use its corners to adjust its size while
-							keeping the selected proportions. Preview the
-							result before downloading. The image is exported as
-							a JPEG at a selected resolution of 200, 300, or 600
-							DPI, with 200 DPI as the default.
+							Choose Photograph or Signature, then select
+							NSDL/Protean or UTIITSL to load the corresponding
+							dimensions, resolution, and file-size limit. The
+							NSDL/Protean presets are 2.5 × 3.5 cm photo and
+							4.5 × 2 cm signature, both at 200 DPI. UTIITSL uses
+							213 × 213 px at 300 DPI for a photo and 400 × 200
+							px at 600 DPI for a signature. You can adjust the
+							dimensions; review the pixel preview and confirm
+							the live portal requirements before uploading.
 						</p>
 						<p>
 							For a photo, start with a recent, clear image and
@@ -737,8 +760,11 @@ import SiteFooter from "../components/SiteFooter.astro";
 							People often search for PAN card photo size in KB,
 							PAN card signature size in KB, or a PAN card photo
 							50KB tool because portals cap the upload size. This
-							resizer compresses each exported JPEG to under 50
-							KB. The displayed file details help you review the
+							resizer compresses each exported JPEG to the
+							selected portal preset’s limit: 50 KB for both
+							NSDL/Protean images, 30 KB for a UTIITSL photo, and
+							60 KB for a UTIITSL signature. The displayed file
+							details help you review the
 							output before saving, and the download is blocked if
 							the image cannot meet that limit at the tool’s
 							minimum quality setting. A simpler, well-lit source
@@ -895,8 +921,11 @@ import SiteFooter from "../components/SiteFooter.astro";
 		const captureGuidance =
 			getElement<HTMLParagraphElement>("#capture-guidance");
 		const dpiInput = getElement<HTMLSelectElement>("#dpi");
+		const portalPresetInput =
+			getElement<HTMLSelectElement>("#portal-preset");
 		const widthInput = getElement<HTMLInputElement>("#width-cm");
 		const heightInput = getElement<HTMLInputElement>("#height-cm");
+		const maxKbInput = getElement<HTMLInputElement>("#max-kb");
 		const filenameInput = getElement<HTMLInputElement>("#filename");
 		const outputDimensions =
 			getElement<HTMLParagraphElement>("#output-dimensions");
@@ -932,7 +961,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 			};
 			corner: string | null;
 		} | null = null;
-		const maxFileSizeKb = 50;
+		let maxFileSizeKb = 50;
 
 		function dimensions() {
 			const widthCm = Number(widthInput.value);
@@ -1062,17 +1091,36 @@ import SiteFooter from "../components/SiteFooter.astro";
 		function setMode(nextMode: "photo" | "signature") {
 			mode = nextMode;
 			const preset =
-				nextMode === "photo"
-					? { width: 2.5, height: 3.5 }
-					: { width: 4.5, height: 2 };
+				portalPresetInput.value === "uti"
+					? nextMode === "photo"
+						? {
+								width: (213 * cmPerInch) / 300,
+								height: (213 * cmPerInch) / 300,
+								dpi: 300,
+								maxKb: 30,
+							}
+						: {
+								width: (400 * cmPerInch) / 600,
+								height: (200 * cmPerInch) / 600,
+								dpi: 600,
+								maxKb: 60,
+							}
+					: nextMode === "photo"
+						? { width: 2.5, height: 3.5, dpi: 200, maxKb: 50 }
+						: { width: 4.5, height: 2, dpi: 200, maxKb: 50 };
 			widthInput.value = String(preset.width);
 			heightInput.value = String(preset.height);
+			dpiInput.value = String(preset.dpi);
+			maxFileSizeKb = preset.maxKb;
+			maxKbInput.value = String(preset.maxKb);
 			filenameInput.value =
 				nextMode === "photo" ? "pan-photo.jpeg" : "pan-signature.jpeg";
 			captureGuidance.textContent =
 				nextMode === "photo"
-					? "Use a clear, recent photograph with a plain white background."
-					: "Sign with dark ink on plain white paper, then photograph or scan the signature clearly.";
+					? "Use a clear, recent color photograph with a plain white background."
+					: portalPresetInput.value === "uti"
+						? "Sign with black ink on plain white paper, then photograph or scan the signature clearly."
+						: "Sign with black or blue ink on plain white paper, then photograph or scan the signature clearly.";
 			modeButtons.forEach((button) => {
 				const active = button.dataset.mode === mode;
 				button.classList.toggle("is-active", active);
@@ -1322,6 +1370,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 					setMode(nextMode);
 			}),
 		);
+		portalPresetInput.addEventListener("change", () => setMode(mode));
 		fileInput.addEventListener("change", (event) => {
 			if (event.currentTarget instanceof HTMLInputElement)
 				loadFile(event.currentTarget.files?.[0]);

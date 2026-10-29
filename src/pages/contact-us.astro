@@ -12,7 +12,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 	<div class="min-h-screen bg-white text-ink">
 		<SiteHeader />
 		<main>
-			<section class="hero-wash px-5 py-14 sm:px-8 sm:py-18">
+			<section class="px-5 py-14 sm:px-8 sm:py-18">
 				<div class="mx-auto text-center max-w-3xl">
 					<p class="eyebrow mb-3">Contact</p>
 					<h1
@@ -20,14 +20,14 @@ import SiteHeader from "../components/SiteHeader.astro";
 					>
 						Let’s talk
 					</h1>
-					<p class="mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
+					<p class="ml-4 mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
 						Whether you have a question, feedback, or just want to say
 						hello, we’d love to hear from you.
 					</p>
 				</div>
 			</section>
 
-			<div class="contact-cards mx-auto px-5 pb-14 sm:px-8 sm:pb-18">
+			<div class="contact-cards">
 				<section
 					class="contact-card"
 					aria-labelledby="get-in-touch"
@@ -94,18 +94,21 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 <style>
 	.contact-cards {
-		display: flex;
-		justify-content: center;
-		gap: 1.5rem;
-		padding: 1.5rem;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1rem;
+		width: min(100%, 68rem);
+		margin-inline: auto;
+		padding: 1.5rem 1rem 3.5rem;
 	}
 
 	.contact-card {
-		max-width: 460px;
+		min-width: 0;
 		border: 1px solid #e8e9ed;
 		border-radius: 14px;
 		background: #fff;
-		padding: 1.5rem;
+		padding: 1.25rem;
 		box-shadow: 0 8px 28px rgba(23, 23, 23, 0.06);
 	}
 
@@ -172,6 +175,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 	.contact-method-value {
 		margin-top: 0.25rem;
 		color: #60646c;
+		overflow-wrap: anywhere;
 	}
 
 	.contact-card p {
@@ -181,8 +185,19 @@ import SiteHeader from "../components/SiteHeader.astro";
 	}
 
 	@media (min-width: 640px) {
+		.contact-cards {
+			gap: 1.5rem;
+			padding: 1.5rem 2rem 4.5rem;
+		}
+
 		.contact-card {
 			padding: 2rem;
+		}
+	}
+
+	@media (min-width: 800px) {
+		.contact-cards {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 </style>

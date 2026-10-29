@@ -1,0 +1,28 @@
+---
+import { faqs } from "../data/faqs";
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map(({ question, answer }) => ({
+		"@type": "Question",
+		name: question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: answer,
+		},
+	})),
+};
+---
+
+<div class="divide-y divide-hairline border-y border-hairline">
+	{
+		faqs.map(({ question, answer }) => (
+			<details class="faq-item">
+				<summary>{question}</summary>
+				<p>{answer}</p>
+			</details>
+		))
+	}
+</div>
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
