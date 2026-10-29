@@ -46,6 +46,15 @@ const {
 		<meta name="twitter:image" content="https://nsdlphotoresize.com/og-image.png" />
 		<meta name="twitter:image:alt" content="PAN Card Photo Resizer — crop and resize photos and signatures online" />
 		<title>{title}</title>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHR6GZEEYW"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				window.dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-GHR6GZEEYW');
+		</script>
 		<script is:inline>
 			(() => {
 				const preferenceKey = "nsdl-photo-resize-theme";
