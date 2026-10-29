@@ -9,7 +9,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 	description="Get in touch with NSDL Photo Resize for questions or feedback. Learn how this browser-based image tool protects your privacy."
 	canonicalUrl="https://nsdlphotoresize.com/contact-us/"
 >
-	<div class="min-h-screen bg-white text-ink">
+	<div class="min-h-screen bg-page text-ink">
 		<SiteHeader />
 		<main>
 			<section class="px-5 py-14 sm:px-8 sm:py-18">
@@ -105,16 +105,16 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 	.contact-card {
 		min-width: 0;
-		border: 1px solid #e8e9ed;
+		border: 1px solid var(--color-hairline);
 		border-radius: 14px;
-		background: #fff;
+		background: var(--color-surface);
 		padding: 1.25rem;
 		box-shadow: 0 8px 28px rgba(23, 23, 23, 0.06);
 	}
 
 	.contact-card h2 {
 		margin: 0;
-		color: #171717;
+		color: var(--color-ink);
 		font-size: 1.5rem;
 		font-weight: 600;
 		line-height: 1.3;
@@ -134,7 +134,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 	}
 
 	a.contact-method:hover {
-		background: #f5f8ff;
+		background: var(--color-surface-soft);
 	}
 
 	.contact-icon {
@@ -174,13 +174,13 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 	.contact-method-value {
 		margin-top: 0.25rem;
-		color: #60646c;
+		color: var(--color-body);
 		overflow-wrap: anywhere;
 	}
 
 	.contact-card p {
 		margin: 0;
-		color: #60646c;
+		color: var(--color-body);
 		line-height: 1.75;
 	}
 

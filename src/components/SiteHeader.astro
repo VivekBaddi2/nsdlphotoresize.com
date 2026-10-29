@@ -8,19 +8,7 @@
 			href="/"
 			aria-label="NSDL Photo Resize home"
 		>
-			<span class="brand-mark" aria-hidden="true">
-				<svg viewBox="0 0 24 24" fill="none">
-					<path
-						d="M7.25 3.75h6.5l4.5 4.5v11.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5V4.25a.5.5 0 0 1 .5-.5Z"
-						stroke="currentColor"
-						stroke-width="1.5"></path>
-					<path
-						d="M13.5 4v4.5H18M9.5 13h6m-6 3h6"
-						stroke="currentColor"
-						stroke-width="1.5"
-						stroke-linecap="round"></path>
-				</svg>
-			</span>
+			<img src="/src/assets/logo.svg" height="44px" width="44px" alt="PAN card resizer logo">
 			<span>NSDL Photo Resize</span>
 		</a>
 		<button
@@ -53,9 +41,27 @@
 					>Contact Us</a
 				>
 			</div>
-			<a class="button-primary h-10! px-4!" href="/#photo-tool"
-				>Resize a photo</a
-			>
+			<div class="site-navigation-actions">
+				<button
+					id="theme-toggle"
+					class="theme-toggle"
+					type="button"
+					aria-label="Switch to dark mode"
+					aria-pressed="false"
+					title="Switch to dark mode"
+				>
+					<svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"></circle>
+						<path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+					</svg>
+				</button>
+				<a class="button-primary h-10! px-4!" href="/#photo-tool"
+					>Resize a photo</a
+				>
+			</div>
 		</div>
 	</nav>
 </header>
@@ -84,8 +90,41 @@
 		height: 2.75rem;
 		border: 1px solid var(--color-hairline);
 		border-radius: 0.5rem;
-		background: white;
+		background: var(--color-surface);
 		color: var(--color-ink);
+	}
+
+	.site-navigation-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.theme-toggle {
+		display: inline-grid;
+		width: 2.5rem;
+		height: 2.5rem;
+		place-items: center;
+		border: 1px solid var(--color-hairline-strong);
+		border-radius: 0.5rem;
+		background: var(--color-surface);
+		color: var(--color-ink);
+		cursor: pointer;
+		transition: background-color 150ms ease, border-color 150ms ease;
+	}
+
+	.theme-toggle:hover {
+		background: var(--color-surface-soft);
+	}
+
+	.theme-icon {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
+
+	html[data-theme="dark"] .theme-icon-moon,
+	html:not([data-theme="dark"]) .theme-icon-sun {
+		display: none;
 	}
 
 	.menu-toggle svg {
@@ -121,7 +160,7 @@
 			padding: 0.75rem 0;
 		}
 
-		.site-navigation > .button-primary {
+		.site-navigation-actions {
 			align-self: flex-start;
 		}
 	}
@@ -143,7 +182,7 @@
 				grid-row: 1;
 			}
 
-			.site-navigation > .button-primary {
+			.site-navigation-actions {
 				grid-column: 3;
 				grid-row: 1;
 				justify-self: end;
@@ -156,6 +195,40 @@
 		document.querySelector<HTMLButtonElement>(".menu-toggle");
 	const siteNavigation =
 		document.querySelector<HTMLDivElement>("#site-navigation");
+	const themeToggle =
+		document.querySelector<HTMLButtonElement>("#theme-toggle");
+
+	function updateThemeToggle() {
+		const isDark = document.documentElement.dataset.theme === "dark";
+		const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+		themeToggle?.setAttribute("aria-label", label);
+		themeToggle?.setAttribute("title", label);
+		themeToggle?.setAttribute("aria-pressed", String(isDark));
+	}
+
+	function setTheme(theme: "light" | "dark") {
+		document.documentElement.dataset.theme = theme;
+		document
+			.querySelector('meta[name="theme-color"]')
+			?.setAttribute("content", theme === "dark" ? "#111315" : "#ffffff");
+		updateThemeToggle();
+	}
+
+	updateThemeToggle();
+	themeToggle?.addEventListener("click", () => {
+		const nextTheme =
+			document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+		setTheme(nextTheme);
+		try {
+			localStorage.setItem("nsdl-photo-resize-theme", nextTheme);
+		} catch (error) {
+			console.error("Unable to save the theme preference.", error);
+		}
+	});
+
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", updateThemeToggle);
 
 	menuToggle?.addEventListener("click", () => {
 		if (!siteNavigation) return;
