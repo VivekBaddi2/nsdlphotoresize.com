@@ -1,22 +1,59 @@
-<footer class="border-t border-hairline px-5 py-8 sm:px-8">
-	<div
-		class="mx-auto flex max-w-6xl flex-col gap-5 text-sm text-body sm:flex-row sm:items-center sm:justify-between"
-	>
-		<div class="space-y-2">
-			<p class="font-medium text-ink">NSDL Photo Resize</p>
-			<p>
-				Independent image utility. Not affiliated with Protean, NSDL, or
-				UTIITSL.
-			</p>
+---
+import logo from "../assets/logo.svg";
+---
+
+<footer class="border-t border-hairline bg-surface-soft px-5 sm:px-8">
+	<div class="mx-auto max-w-6xl">
+		<div class="grid grid-cols-2 gap-x-8 gap-y-10 py-12 sm:gap-x-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-12 lg:py-14">
+			<div class="col-span-2 max-w-xs space-y-3 lg:col-span-1">
+				<a class="inline-flex items-center gap-2.5 font-semibold tracking-tight text-ink" href="/">
+					<img src={logo.src} width="36" height="36" alt="" />
+					NSDL Photo Resize
+				</a>
+				<p class="text-sm leading-6 text-body">
+					Use this PAN card photo resizer to crop and resize photos
+					and signatures for PAN applications. Adjust dimensions and
+					download a JPEG; your images stay in your browser.
+				</p>
+			</div>
+
+			<nav aria-label="Footer navigation">
+				<h2 class="mb-4 text-xs font-medium uppercase tracking-wider text-muted">
+					Navigation
+				</h2>
+				<ul class="space-y-3 text-sm">
+					<li><a class="text-body transition hover:text-ink" href="/">Home</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/about/">About</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/features/">Features</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/how-it-works/">How it works</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/faq/">FAQ</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/contact-us/">Contact Us</a></li>
+				</ul>
+			</nav>
+
+			<nav aria-label="Legal">
+				<h2 class="mb-4 text-xs font-medium uppercase tracking-wider text-muted">
+					Legal
+				</h2>
+				<ul class="space-y-3 text-sm">
+					<li><a class="text-body transition hover:text-ink" href="/privacy-policy/">Privacy Policy</a></li>
+					<li><a class="text-body transition hover:text-ink" href="/terms-of-service/">Terms of Service</a></li>
+				</ul>
+			</nav>
+
+			<nav aria-label="Tools">
+				<h2 class="mb-4 text-xs font-medium uppercase tracking-wider text-muted">
+					Tool
+				</h2>
+				<ul class="space-y-3 text-sm">
+					<li><a class="text-body transition hover:text-ink" href="/#photo-tool">PAN Photo Resizer</a></li>
+				</ul>
+			</nav>
 		</div>
-		<nav aria-label="Footer navigation" class="flex flex-wrap gap-x-5 gap-y-2">
-			<a class="text-link" href="/">Home</a>
-			<a class="text-link" href="/about/">About</a>
-			<a class="text-link" href="/features/">Features</a>
-			<a class="text-link" href="/how-it-works/">How it works</a>
-			<a class="text-link" href="/faq/">FAQ</a>
-			<a class="text-link" href="/contact-us/">Contact Us</a>
-			<a class="text-link" href="/#photo-tool">Use the resizer</a>
-		</nav>
+
+		<div class="flex flex-col gap-2 border-t border-hairline py-5 text-xs leading-5 text-muted sm:flex-row sm:items-center sm:justify-between">
+			<p>© {new Date().getFullYear()} NSDL Photo Resize. All rights reserved.</p>
+			<p>Independent tool. Not affiliated with Protean, NSDL, or UTIITSL.</p>
+		</div>
 	</div>
 </footer>
