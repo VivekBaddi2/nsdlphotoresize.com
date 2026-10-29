@@ -1,0 +1,85 @@
+---
+import BlogArticle from "../../components/BlogArticle.astro";
+---
+
+<BlogArticle
+	title="PAN Card Signature Size in Pixels and KB: NSDL vs UTIITSL"
+	description="Compare commonly quoted NSDL/Protean and UTIITSL PAN signature size presets in pixels, centimetres, DPI and KB, with current-form guidance."
+	canonicalUrl="https://nsdlphotoresize.com/blogs/pan-card-signature-size/"
+	heading="PAN card signature size in pixels and KB: NSDL vs UTIITSL"
+	intro="There is no one signature size for every PAN application. The correct dimensions and file limit depend on the application route and the current instructions shown by that provider."
+>
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">Commonly quoted legacy signature presets</h2>
+		<div class="overflow-x-auto">
+			<table class="w-full min-w-xl border-collapse text-left text-sm">
+				<thead class="bg-surface-soft text-ink">
+					<tr>
+						<th class="border border-hairline px-4 py-3">Legacy route preset</th>
+						<th class="border border-hairline px-4 py-3">Common dimensions</th>
+						<th class="border border-hairline px-4 py-3">Common file limit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border border-hairline px-4 py-3">Protean / NSDL reference</td>
+						<td class="border border-hairline px-4 py-3">4.5 × 2 cm; about 354 × 157 px at 200 DPI</td>
+						<td class="border border-hairline px-4 py-3">50 KB</td>
+					</tr>
+					<tr>
+						<td class="border border-hairline px-4 py-3">UTIITSL reference</td>
+						<td class="border border-hairline px-4 py-3">400 × 200 px at 600 DPI</td>
+						<td class="border border-hairline px-4 py-3">60 KB</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p>
+			These are widely repeated older specifications, not a promise
+			about the current upload screen. Since April 2026, new Indian PAN
+			applications use Form 93 or Form 94. Check that form’s current
+			requirements before using a legacy NSDL PAN card photo resizer or
+			UTI PAN card photo resizer preset.
+		</p>
+	</section>
+
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">PAN card signature size in KB, pixels and DPI</h2>
+		<p>
+			Pixels set the image’s width and height; they do not determine
+			its file size by themselves. A noisy or highly detailed signature
+			scan can be larger than a clean, tightly cropped version at the
+			same pixel dimensions. DPI is chiefly relevant when a form
+			specifies a physical size or print resolution; it is not a
+			substitute for setting the right pixel dimensions.
+		</p>
+		<p>
+			For the common legacy Protean size, converting 4.5 × 2 cm at 200
+			DPI gives roughly 354 × 157 pixels after rounding. Keep the
+			original aspect ratio and do not stretch the handwritten mark to
+			fill the entire rectangle.
+		</p>
+	</section>
+
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">Prepare and verify the signature file</h2>
+		<ol class="list-decimal space-y-3 pl-6">
+			<li>Sign with the writing instrument and on the background requested by the current application. A common preparation method is dark ink on plain white paper.</li>
+			<li>Scan or photograph the original evenly, then crop to include the full signature and a small margin.</li>
+			<li>Use a <a class="text-link" href="/#photo-tool">PAN card signature resizer</a> to set the current requested dimensions, then export to the accepted format.</li>
+			<li>Check the saved file’s extension, dimensions and actual size in the file information on your device. Reopen it at full size to check readability.</li>
+		</ol>
+		<p>
+			Do not copy, redraw, or alter the signature to make it look like
+			a different signature. Compression should reduce file weight,
+			not remove strokes or change the appearance.
+		</p>
+	</section>
+
+	<p>
+		For the latest instructions, use
+		<a class="text-link" href="https://tinpan.proteantech.in/services/pan/instructions-form_93-form_94.html">Protean’s Form 93/94 instructions</a>
+		or the <a class="text-link" href="https://www.pan.utiitsl.com/PAN/newA.html">UTIITSL Form 93/94 page</a>.
+		This independent resizer is not affiliated with NSDL, Protean or UTIITSL.
+	</p>
+</BlogArticle>

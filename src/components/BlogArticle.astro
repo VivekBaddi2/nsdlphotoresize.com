@@ -1,0 +1,32 @@
+---
+import ContentPage from "./ContentPage.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	canonicalUrl: string;
+	heading: string;
+	intro: string;
+}
+
+const { title, description, canonicalUrl, heading, intro } = Astro.props;
+---
+
+<ContentPage
+	title={title}
+	description={description}
+	canonicalUrl={canonicalUrl}
+	eyebrow="PAN photo and signature guides"
+	heading={heading}
+	intro={intro}
+>
+	<div class="space-y-5">
+		<p class="text-sm text-muted">
+			Last reviewed
+			<time datetime="2026-10-29">29 October 2026</time>
+		</p>
+		<article class="space-y-8">
+			<slot />
+		</article>
+	</div>
+</ContentPage>

@@ -1,0 +1,124 @@
+---
+import ContentPage from "../components/ContentPage.astro";
+
+const posts = [
+	{
+		category: "Photo requirements",
+		title: "How to resize a photo for a PAN card application",
+		description:
+			"Understand photo dimensions, pixel size, resolution, and KB limits, and check the rules for the current application form.",
+		href: "/blogs/resize-pan-card-photo/",
+	},
+	{
+		category: "Signature requirements",
+		title: "PAN card signature size in pixels and KB: NSDL vs UTIITSL",
+		description:
+			"Compare commonly quoted signature presets and learn why current Form 93/94 upload instructions should take priority.",
+		href: "/blogs/pan-card-signature-size/",
+	},
+	{
+		category: "Image compression",
+		title: "How to reduce a photo to under 50 KB for a PAN card online",
+		description:
+			"Crop and compress a photo carefully, check its actual file size, and avoid sacrificing clarity just to meet a KB limit.",
+		href: "/blogs/reduce-pan-photo-under-50kb/",
+	},
+	{
+		category: "UTIITSL photo sizing",
+		title: "How to resize a PAN card photo to 213 × 213 pixels",
+		description:
+			"Learn how to make a square image, while checking whether the older 213 × 213 preset applies to the current UTIITSL form.",
+		href: "/blogs/uti-pan-photo-213x213/",
+	},
+	{
+		category: "Paper applications",
+		title: "PAN card photo size in cm and mm for an offline form",
+		description:
+			"Understand the familiar passport-photo measurement and why the photo box on the current paper form is the final reference.",
+		href: "/blogs/pan-photo-size-cm-mm/",
+	},
+	{
+		category: "Signature file format",
+		title: "How to convert a signature to JPG for a PAN card",
+		description:
+			"Prepare a clear JPEG from a signature scan or photograph, then confirm the current portal's size and format rules.",
+		href: "/blogs/convert-pan-signature-to-jpg/",
+	},
+	{
+		category: "Scanning and cropping",
+		title: "How to scan and crop a PAN card signature on a white background",
+		description:
+			"Capture a clean signature with good contrast, a plain white background, and enough space around the ink.",
+		href: "/blogs/scan-crop-pan-signature/",
+	},
+	{
+		category: "Mobile how-to",
+		title: "How to resize a PAN card photo on mobile without an app",
+		description:
+			"Use a mobile browser to select, crop, resize, and save a photo without installing a separate app.",
+		href: "/blogs/resize-pan-photo-on-mobile/",
+	},
+	{
+		category: "Application checklist",
+		title: "Documents required for a new PAN card application",
+		description:
+			"Prepare identity, address, and date-of-birth documents for a new PAN application, with notes for the current forms.",
+		href: "/blogs/documents-for-new-pan/",
+	},
+	{
+		category: "PAN corrections",
+		title: "How to correct or update the photo or signature on a PAN card",
+		description:
+			"Learn how to request a photo or signature update on an existing PAN record, and when a reprint is not enough.",
+		href: "/blogs/update-pan-photo-signature/",
+	},
+	{
+		category: "PAN card reprint",
+		title: "PAN card reprint steps",
+		description:
+			"Understand when to request a reprint, what the Protean reprint facility covers, and what to do if details must change.",
+		href: "/blogs/pan-card-reprint/",
+	},
+	{
+		category: "Minor PAN applications",
+		title: "How to apply for a minor’s PAN card",
+		description:
+			"Review the representative assessee, documents, and submission steps for a child’s PAN application.",
+		href: "/blogs/minor-pan-card/",
+	},
+	{
+		category: "Photo requirements",
+		title: "PAN card photo requirements: background, dimensions, dos and don’ts",
+		description:
+			"Prepare a clear photo and check the background, crop, file format, and dimensions required by your current PAN application.",
+		href: "/blogs/pan-photo-requirements/",
+	},
+];
+---
+
+<ContentPage
+	title="PAN Card Photo Resizer Blog | Photo and Signature Guides"
+	description="Read practical guides to PAN application photo dimensions, pixels and KB limits, signature preparation, and using a PAN card photo resizer online."
+	canonicalUrl="https://nsdlphotoresize.com/blogs/"
+	eyebrow="Tips and guides"
+	heading="PAN card photo and signature guides"
+	intro="Get practical help with PAN application photos and signatures. Always compare file requirements with the live application form before uploading."
+	contentWidth="wide"
+>
+	<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+		{
+			posts.map((post) => (
+				<article class="flex flex-col items-start gap-4 rounded-xl border border-hairline bg-surface p-6">
+					<p class="eyebrow">{post.category}</p>
+					<h2 class="text-xl font-semibold leading-snug text-ink">
+						{post.title}
+					</h2>
+					<p class="leading-7 text-body">{post.description}</p>
+					<a class="text-link mt-auto" href={post.href}>
+						Read the guide <span aria-hidden="true">→</span>
+					</a>
+				</article>
+			))
+		}
+	</div>
+</ContentPage>

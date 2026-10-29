@@ -1,0 +1,72 @@
+---
+import BlogArticle from "../../components/BlogArticle.astro";
+---
+
+<BlogArticle
+	title="How to Resize a Photo for a PAN Card: Size, Pixels and KB"
+	description="Learn how to resize a PAN card photo, understand dimensions, pixels, DPI and KB limits, and verify the current Form 93/94 upload rules."
+	canonicalUrl="https://nsdlphotoresize.com/blogs/resize-pan-card-photo/"
+	heading="How to resize a photo for a PAN card application"
+	intro="A suitable PAN photo must match the application’s current image rules and remain clear after resizing. Dimensions, pixel count, resolution and file size are related, but they are not interchangeable."
+>
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">Check the current application first</h2>
+		<p>
+			Before starting an NSDL photo resize or choosing a UTIITSL preset,
+			identify the form you are actually submitting. As of 1 April 2026,
+			Protean says Indian applicants should use the revised Form 93 or
+			Form 94 for a new PAN application; UTIITSL also lists those new
+			forms and says older Form 49A applications are no longer accepted.
+			The current upload flow, not an old tutorial or a preset label,
+			decides which dimensions and file limit to follow.
+		</p>
+		<p>
+			Older guides often quote a Protean/NSDL photo of 2.5 × 3.5 cm at
+			200 DPI and up to 50 KB, or a UTIITSL photo of 213 × 213 pixels at
+			300 DPI and under 30 KB. Treat these as legacy reference presets
+			unless the current form displays the same requirements.
+		</p>
+	</section>
+
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">PAN card photo size in KB, pixels and DPI</h2>
+		<p>
+			Width and height in pixels describe how many picture elements make
+			up the image. DPI describes how those pixels map to a printed
+			dimension; changing DPI metadata alone does not add detail or
+			change the pixel count. Kilobytes (KB) measure the saved file’s
+			size, which is affected by pixel dimensions, image detail, color,
+			and JPEG compression. A photo can have the correct pixel size and
+			still exceed the allowed KB.
+		</p>
+	</section>
+
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">A practical resizing workflow</h2>
+		<ol class="list-decimal space-y-3 pl-6">
+			<li>Open the official application and note its current photo format, aspect ratio, pixel/DPI requirements, and maximum file size.</li>
+			<li>Choose a recent, sharp, well-lit color photo with a plain background. Avoid a screenshot or a photo of a printed photo if a clean original is available.</li>
+			<li>Use a <a class="text-link" href="/#photo-tool">PAN card photo resizer</a> to select the photo, set the requested aspect ratio, and crop around the head and shoulders as instructed.</li>
+			<li>Set the exact pixel dimensions if the application specifies them. Export as the required format, usually JPEG only when the form asks for JPEG.</li>
+			<li>Check the downloaded file’s dimensions, file type and actual size on your device. Reopen it to ensure the face remains sharp and the background looks clean.</li>
+		</ol>
+	</section>
+
+	<section class="space-y-3">
+		<h2 class="text-2xl font-semibold text-ink">Avoid common PAN photo mistakes</h2>
+		<p>
+			Do not assume that “passport size,” a particular DPI, or a 50 KB
+			limit applies to every route. Do not stretch a small image to
+			create artificial detail, and do not keep lowering JPEG quality
+			until the face looks blocky. If the correct crop cannot meet the
+			limit without becoming unclear, start with a better source image.
+		</p>
+		<p>
+			This independent PAN card document resizer online prepares an
+			image file; it does not submit an application or guarantee
+			acceptance. Read <a class="text-link" href="https://tinpan.proteantech.in/services/pan/pan-index.html">Protean’s current PAN application guidance</a>
+			and <a class="text-link" href="https://www.pan.utiitsl.com/PAN/newA.html">UTIITSL’s current Form 93/94 information</a>
+			before uploading.
+		</p>
+	</section>
+</BlogArticle>

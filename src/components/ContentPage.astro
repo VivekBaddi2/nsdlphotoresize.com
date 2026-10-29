@@ -10,10 +10,20 @@ interface Props {
 	eyebrow: string;
 	heading: string;
 	intro: string;
+	contentWidth?: "default" | "wide";
 }
 
-const { title, description, canonicalUrl, eyebrow, heading, intro } =
-	Astro.props;
+const {
+	title,
+	description,
+	canonicalUrl,
+	eyebrow,
+	heading,
+	intro,
+	contentWidth = "default",
+} = Astro.props;
+const contentWidthClass =
+	contentWidth === "wide" ? "max-w-7xl" : "max-w-3xl";
 ---
 
 <Layout title={title} description={description} canonicalUrl={canonicalUrl}>
@@ -36,7 +46,7 @@ const { title, description, canonicalUrl, eyebrow, heading, intro } =
 					</a>
 				</div>
 			</section>
-			<div class="mx-auto max-w-3xl space-y-8 px-5 py-12 leading-7 text-body sm:px-8 sm:py-16">
+			<div class:list={["mx-auto space-y-8 px-5 py-12 leading-7 text-body sm:px-8 sm:py-16", contentWidthClass]}>
 				<slot />
 			</div>
 		</main>
