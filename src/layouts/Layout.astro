@@ -4,13 +4,15 @@ import '../styles/global.css';
 interface Props {
 	title?: string;
 	description?: string;
-	canonicalUrl?: string;
+	canonicalUrl?: string | null;
+	noindex?: boolean;
 }
 
 const {
 	title = 'PAN Card Photo Resizer Online | NSDL & UTIITSL Photo resize tool',
 	description = 'Resize PAN card photos and signatures with NSDL/Protean or UTIITSL presets for dimensions, resolution, and JPEG file-size limits. Process images privately in your browser.',
 	canonicalUrl = 'https://nsdlphotoresize.com/',
+	noindex = false,
 } = Astro.props;
 ---
 
@@ -25,13 +27,14 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#ffffff" />
-		<link rel="canonical" href={canonicalUrl} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="NSDL Photo Resize" />
 		<meta property="og:locale" content="en_IN" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonicalUrl} />
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 		<meta property="og:image" content="https://nsdlphotoresize.com/og-image.png" />
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />

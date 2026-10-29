@@ -1,3 +1,7 @@
+---
+import logo from "../assets/logo.svg";
+---
+
 <header class="border-b border-hairline">
 	<nav
 		class="mx-auto flex min-h-16 flex-wrap items-center justify-between gap-y-3 px-5 py-3 sm:px-8"
@@ -8,12 +12,7 @@
 			href="/"
 			aria-label="NSDL Photo Resize home"
 		>
-			<img
-				src="/src/assets/logo.svg"
-				height="44px"
-				width="44px"
-				alt="PAN card resizer logo"
-			/>
+			<img src={logo.src} width="36" height="36" alt="" />
 			<span>NSDL Photo Resize</span>
 		</a>
 		<div class="header-controls">
