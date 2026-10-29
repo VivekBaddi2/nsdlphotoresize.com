@@ -1,0 +1,179 @@
+<header class="border-b border-hairline">
+	<nav
+		class="mx-auto flex min-h-16 flex-wrap items-center justify-between gap-y-3 px-5 py-3 sm:px-8"
+		aria-label="Main navigation"
+	>
+		<a
+			class="flex items-center gap-2.5 font-semibold tracking-tight"
+			href="/"
+			aria-label="NSDL Photo Resize home"
+		>
+			<span class="brand-mark" aria-hidden="true">
+				<svg viewBox="0 0 24 24" fill="none">
+					<path
+						d="M7.25 3.75h6.5l4.5 4.5v11.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5V4.25a.5.5 0 0 1 .5-.5Z"
+						stroke="currentColor"
+						stroke-width="1.5"></path>
+					<path
+						d="M13.5 4v4.5H18M9.5 13h6m-6 3h6"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"></path>
+				</svg>
+			</span>
+			<span>NSDL Photo Resize</span>
+		</a>
+		<button
+			class="menu-toggle"
+			type="button"
+			aria-expanded="false"
+			aria-controls="site-navigation"
+			aria-label="Open navigation menu"
+		>
+			<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M4 7h16M4 12h16M4 17h16"
+					stroke="currentColor"
+					stroke-width="1.8"
+					stroke-linecap="round"></path>
+			</svg>
+		</button>
+		<div id="site-navigation" class="site-navigation">
+			<div class="site-navigation-links">
+				<a class="transition hover:text-ink" href="/">Home</a>
+				<a class="transition hover:text-ink" href="/about/">About</a>
+				<a class="transition hover:text-ink" href="/features/"
+					>Features</a
+				>
+				<a class="transition hover:text-ink" href="/how-it-works/"
+					>How it works</a
+				>
+				<a class="transition hover:text-ink" href="/faq/">FAQ</a>
+				<a class="transition hover:text-ink" href="/contact-us/"
+					>Contact Us</a
+				>
+			</div>
+			<a class="button-primary h-10! px-4!" href="/#photo-tool"
+				>Resize a photo</a
+			>
+		</div>
+	</nav>
+</header>
+
+<style>
+	.site-navigation {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+	}
+
+	.site-navigation-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem 1.25rem;
+		font-size: 0.875rem;
+		color: var(--color-body);
+	}
+
+	.menu-toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 1px solid var(--color-hairline);
+		border-radius: 0.5rem;
+		background: white;
+		color: var(--color-ink);
+	}
+
+	.menu-toggle svg {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+
+	@media (max-width: 767px), (orientation: portrait) and (max-width: 1024px) {
+		.menu-toggle {
+			display: inline-flex;
+		}
+
+		.site-navigation {
+			display: none;
+			width: 100%;
+			align-items: stretch;
+			flex-direction: column;
+			padding: 0.5rem 0 0.25rem;
+		}
+
+		.site-navigation.is-open {
+			display: flex;
+		}
+
+		.site-navigation-links {
+			align-items: stretch;
+			flex-direction: column;
+			gap: 0;
+			font-size: 1rem;
+		}
+
+		.site-navigation-links a {
+			padding: 0.75rem 0;
+		}
+
+		.site-navigation > .button-primary {
+			align-self: flex-start;
+		}
+	}
+
+		@media (min-width: 1024px) and (orientation: landscape), (min-width: 1025px) {
+			header nav {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+				column-gap: 1.25rem;
+				flex-wrap: nowrap;
+			}
+
+			.site-navigation {
+				display: contents;
+			}
+
+			.site-navigation-links {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			.site-navigation > .button-primary {
+				grid-column: 3;
+				grid-row: 1;
+				justify-self: end;
+			}
+		}
+</style>
+
+<script>
+	const menuToggle =
+		document.querySelector<HTMLButtonElement>(".menu-toggle");
+	const siteNavigation =
+		document.querySelector<HTMLDivElement>("#site-navigation");
+
+	menuToggle?.addEventListener("click", () => {
+		if (!siteNavigation) return;
+
+		const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+		menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+		menuToggle.setAttribute(
+			"aria-label",
+			isExpanded ? "Open navigation menu" : "Close navigation menu",
+		);
+		siteNavigation.classList.toggle("is-open", !isExpanded);
+	});
+
+	siteNavigation?.querySelectorAll("a").forEach((link) => {
+		link.addEventListener("click", () => {
+			menuToggle?.setAttribute("aria-expanded", "false");
+			menuToggle?.setAttribute("aria-label", "Open navigation menu");
+			siteNavigation.classList.remove("is-open");
+		});
+	});
+</script>

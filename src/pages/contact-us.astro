@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+---
+
+<Layout
+	title="Contact Us | PAN Card Photo Resizer Online"
+	description="Get in touch with NSDL Photo Resize for questions or feedback. Learn how this browser-based image tool protects your privacy."
+	canonicalUrl="https://nsdlphotoresize.com/contact-us/"
+>
+	<div class="min-h-screen bg-white text-ink">
+		<SiteHeader />
+		<main>
+			<section class="hero-wash px-5 py-14 sm:px-8 sm:py-18">
+				<div class="mx-auto text-center max-w-3xl">
+					<p class="eyebrow mb-3">Contact</p>
+					<h1
+						class="text-2xl font-semibold leading-tight tracking-[-0.045em] sm:text-5xl"
+					>
+						Let’s talk
+					</h1>
+					<p class="mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
+						Whether you have a question, feedback, or just want to say
+						hello, we’d love to hear from you.
+					</p>
+				</div>
+			</section>
+
+			<div class="contact-cards mx-auto px-5 pb-14 sm:px-8 sm:pb-18">
+				<section
+					class="contact-card"
+					aria-labelledby="get-in-touch"
+				>
+					<h2 id="get-in-touch" class="text-sm">Get in touch</h2>
+					<a
+						class="contact-method"
+						href="mailto:contact@nsdlphotoresize.com"
+					>
+						<span
+							class="contact-icon contact-icon-email"
+							aria-hidden="true"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.8"
+							>
+								<rect x="3" y="5" width="18" height="14" rx="2"></rect>
+								<path d="m4 7 8 6 8-6"></path>
+							</svg>
+						</span>
+						<span>
+							<span class="contact-method-label">Email</span>
+							<span class="contact-method-value"
+								>contact@nsdlphotoresize.com</span
+							>
+						</span>
+					</a>
+				</section>
+
+				<section
+					class="contact-card"
+					aria-labelledby="privacy-commitment"
+				>
+					<h2 id="privacy-commitment">Our commitment to privacy</h2>
+					<div class="contact-method">
+						<span
+							class="contact-icon contact-icon-privacy"
+							aria-hidden="true"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.8"
+							>
+								<rect x="5" y="10" width="14" height="11" rx="2"></rect>
+								<path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+							</svg>
+						</span>
+						<p>
+							Your images are processed entirely in your browser. They
+							are never uploaded to or stored by this website.
+						</p>
+					</div>
+				</section>
+			</div>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<style>
+	.contact-cards {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		padding: 1.5rem;
+	}
+
+	.contact-card {
+		max-width: 460px;
+		border: 1px solid #e8e9ed;
+		border-radius: 14px;
+		background: #fff;
+		padding: 1.5rem;
+		box-shadow: 0 8px 28px rgba(23, 23, 23, 0.06);
+	}
+
+	.contact-card h2 {
+		margin: 0;
+		color: #171717;
+		font-size: 1.5rem;
+		font-weight: 600;
+		line-height: 1.3;
+	}
+
+	.contact-method {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	a.contact-method {
+		border-radius: 12px;
+		text-decoration: none;
+		transition: background-color 150ms ease;
+	}
+
+	a.contact-method:hover {
+		background: #f5f8ff;
+	}
+
+	.contact-icon {
+		display: grid;
+		width: 2rem;
+		height: 2rem;
+		flex: 0 0 2rem;
+		place-items: center;
+		border-radius: 9999px;
+	}
+
+	.contact-icon svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.contact-icon-email {
+		background: #e8f1ff;
+		color: #2563eb;
+	}
+
+	.contact-icon-privacy {
+		background: #dcfce7;
+		color: #16a34a;
+	}
+
+	.contact-method-label,
+	.contact-method-value {
+		display: block;
+	}
+
+	.contact-method-label {
+		color: #2563eb;
+		font-size: 1.125rem;
+		font-weight: 500;
+	}
+
+	.contact-method-value {
+		margin-top: 0.25rem;
+		color: #60646c;
+	}
+
+	.contact-card p {
+		margin: 0;
+		color: #60646c;
+		line-height: 1.75;
+	}
+
+	@media (min-width: 640px) {
+		.contact-card {
+			padding: 2rem;
+		}
+	}
+</style>

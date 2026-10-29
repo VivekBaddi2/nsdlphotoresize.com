@@ -1,10 +1,17 @@
 ---
 import '../styles/global.css';
 
-const title = 'PAN Card Photo Resizer Online | Photo & Signature Tool';
-const description =
-	'Resize and crop PAN card photos and signatures online. Prepare JPEG files under 50 KB with adjustable dimensions and 200 DPI or higher, right in your browser.';
-const canonicalUrl = 'https://nsdlphotoresize.com/';
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalUrl?: string;
+}
+
+const {
+	title = 'PAN Card Photo Resizer Online | Photo & Signature Tool',
+	description = 'Resize and crop PAN card photos and signatures online. Prepare JPEG files under 50 KB with adjustable dimensions and 200 DPI or higher, right in your browser.',
+	canonicalUrl = 'https://nsdlphotoresize.com/',
+} = Astro.props;
 ---
 
 <!doctype html>
